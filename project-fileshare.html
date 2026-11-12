@@ -100,17 +100,17 @@
         <li>Ran connectivity tests (ping) from every router, the gateway, and both clients</li>
       </ul>
 
-      <h2>Key features</h2>
+      <h2>Key Features</h2>
       <div class="pj-cards">
-        <div class="pj-card"><i class="fa-solid fa-network-wired"></i><h3>Segmented network</h3><p>Three routers and three switches split clients and server into separate subnets.</p></div>
-        <div class="pj-card"><i class="fa-solid fa-shield-halved"></i><h3>Central gateway</h3><p>All inter-subnet traffic passes through one Ubuntu machine that filters it.</p></div>
-        <div class="pj-card"><i class="fa-solid fa-file-arrow-up"></i><h3>File sharing</h3><p>List, upload, and download files through a custom TCP protocol in Python.</p></div>
+        <div class="pj-card"><i class="fa-solid fa-network-wired"></i><h3>Segmented Network</h3><p>Three routers and three switches split clients and server into separate subnets.</p></div>
+        <div class="pj-card"><i class="fa-solid fa-shield-halved"></i><h3>Central Gateway</h3><p>All inter-subnet traffic passes through one Ubuntu machine that filters it.</p></div>
+        <div class="pj-card"><i class="fa-solid fa-file-arrow-up"></i><h3>File Sharing</h3><p>List, upload, and download files through a custom TCP protocol in Python.</p></div>
       </div>
     </section>
 
     <!-- ================= ARCHITECTURE ================= -->
     <section class="pj-panel" id="p-arch" role="tabpanel" aria-labelledby="t-arch" hidden>
-      <h2>Network topology</h2>
+      <h2>Network Topology</h2>
       <figure class="pj-figure">
         <img src="images/fileshare-topology.png" alt="GNS3 topology with NAT1, routers R1, R2, R3, UbuntuRouter, three switches, two Puppy Linux clients, and the Ubuntu server" loading="lazy">
         <figcaption>GNS3 topology: NAT1 → R1 → UbuntuRouter → R2 (server) and R3 (client 2).</figcaption>
@@ -121,7 +121,7 @@
         in its own segment behind R2.
       </p>
 
-      <h2>IP addressing plan</h2>
+      <h2>IP Addressing Plan</h2>
       <div class="table-wrap">
         <table class="pj-table">
           <thead><tr><th>Device</th><th>Interface</th><th>IP address</th><th>Connected to</th></tr></thead>
@@ -147,7 +147,7 @@
         <li>The Ubuntu router also does IP forwarding and <code>MASQUERADE</code> with iptables.</li>
       </ul>
 
-      <h2>Router configuration results</h2>
+      <h2>Router Configuration Results</h2>
       <div class="pj-gallery">
         <figure class="pj-figure">
           <img src="images/fileshare/r1-routing.png" alt="Routing table on R1" loading="lazy">
@@ -163,7 +163,7 @@
         </figure>
       </div>
 
-      <h2>Application architecture</h2>
+      <h2>Application Architecture</h2>
       <p>
         The app uses a classic client-server model over TCP. The server listens on <code>0.0.0.0:5000</code>,
         handles one request at a time, and stores files in a <code>shared_files</code> folder.
@@ -173,7 +173,7 @@
 
     <!-- ================= SECURITY ================= -->
     <section class="pj-panel" id="p-security" role="tabpanel" aria-labelledby="t-security" hidden>
-      <h2>Security layers</h2>
+      <h2>Security Layers</h2>
       <div class="pj-cards">
         <div class="pj-card"><i class="fa-solid fa-sitemap"></i><h3>Segmentation</h3><p>Clients and server sit in different subnets. Traffic between them is forced through the Ubuntu gateway.</p></div>
         <div class="pj-card"><i class="fa-solid fa-fire"></i><h3>Firewall (UFW)</h3><p>Incoming traffic is denied by default. Only SSH (rate-limited), HTTPS, and the VPN port are allowed.</p></div>
@@ -188,7 +188,7 @@
         <li><strong>Peer.</strong> Generated keys on the peer and exchanged the server public key.</li>
       </ol>
 
-      <h2>Configuration results</h2>
+      <h2>Configuration Results</h2>
       <div class="pj-gallery">
         <figure class="pj-figure">
           <img src="images/fileshare/ubuntu-nat.jpg" alt="Ubuntu router: NAT and forwarding" loading="lazy">
@@ -208,7 +208,7 @@
 
     <!-- ================= CODE ================= -->
     <section class="pj-panel" id="p-code" role="tabpanel" aria-labelledby="t-code" hidden>
-      <h2>Application protocol</h2>
+      <h2>Application Protocol</h2>
       <p>The Python server and client talk through short text commands, then stream the file in 4096-byte chunks.</p>
       <div class="table-wrap">
         <table class="pj-table">
@@ -221,14 +221,14 @@
         </table>
       </div>
 
-      <h2>Server and client</h2>
+      <h2>Server and Client</h2>
       <ul class="pj-list">
         <li>Libraries: <code>socket</code>, <code>os</code>, <code>argparse</code></li>
         <li>Server: TCP socket with <code>SO_REUSEADDR</code>, <code>listen(5)</code>, one handler per command, and <code>try/except/finally</code> so sockets always close</li>
         <li>Client: interactive menu (list, upload, download, exit) or direct modes with <code>--mode</code> and <code>--file</code>, plus a live progress bar</li>
       </ul>
 
-      <h2>Code screenshots</h2>
+      <h2>Code Screenshots</h2>
       <div class="pj-gallery">
         <figure class="pj-figure">
           <img src="images/fileshare/code-server.png" alt="Server code" loading="lazy">
@@ -240,14 +240,14 @@
         </figure>
       </div>
 
-      <h2>Run it</h2>
+      <h2>Run It</h2>
       <pre class="code-block"><code># On Ubuntu server
 python3 FileShareServer.py --port=5000
 
 # On Puppy Linux client
 python3 FileShareClient.py --host=172.25.15.130 --port=5000</code></pre>
 
-      <h2>Network configuration samples</h2>
+      <h2>Network Configuration Samples</h2>
       <p class="code-label">Cisco R1: NAT and static routes</p>
       <pre class="code-block"><code>interface fa0/0
  ip nat outside
