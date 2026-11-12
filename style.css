@@ -90,6 +90,10 @@ i{color:var(--accent-strong);}
 
 /* ===== About ===== */
 .about-text{max-width:720px;color:var(--text-soft);margin-bottom:28px;}
+.about-stats{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:28px;}
+.stat{display:flex;align-items:baseline;gap:8px;background:var(--blush);border-radius:30px;padding:8px 18px;}
+.stat strong{font-family:var(--font-head);font-size:1.15rem;font-weight:700;color:var(--accent-strong);}
+.stat span{font-size:.82rem;font-weight:500;color:var(--charcoal);}
 .info-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
 .info-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:box-shadow .2s ease,transform .2s ease;}
 .info-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-3px);}
