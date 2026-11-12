@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Sharing System — Jesicca Anastasya</title>
+  <meta name="description" content="Distributed systems project: a secure file sharing system on a GNS3 network with Cisco routers, Ubuntu firewall/VPN, and Puppy Linux clients.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Montserrat:wght@400;500;600&family=Allura&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#project">Skip to content</a>
+
+  <header class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html#home" class="logo">Jesicca A.</a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html#home">Home</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#skills">Skills</a>
+        <a href="index.html#projects" class="active">Projects</a>
+        <a href="index.html#experience">Experience</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="project" class="project-page">
+
+    <a href="index.html#projects" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to projects</a>
+
+    <!-- ===== Header ===== -->
+    <section class="pj-hero">
+      <p class="eyebrow">Distributed Systems · Final Project</p>
+      <h1>File Sharing System with Ubuntu &amp; Puppy Linux</h1>
+      <p class="pj-role">Role: <span>Network Engineer — IP &amp; Infrastructure</span></p>
+      <p class="pj-lead">
+        A client-server file sharing system running on a virtual network built in GNS3,
+        with Cisco routers, an Ubuntu firewall/VPN gateway, and Puppy Linux clients.
+        I handled everything related to the IP design: addressing, routing, NAT, firewall, and VPN.
+      </p>
+      <div class="tag-row">
+        <span class="tag">GNS3</span>
+        <span class="tag">Cisco Router</span>
+        <span class="tag">Ubuntu Server</span>
+        <span class="tag">Puppy Linux</span>
+        <span class="tag">iptables / UFW</span>
+        <span class="tag">WireGuard</span>
+        <span class="tag">Python Socket</span>
+        <span class="tag">VirtualBox</span>
+      </div>
+    </section>
+
+    <!-- COVER: sama dengan cover di kartu. Taruh fotomu di images/fileshare-cover.png -->
+    <figure class="pj-cover">
+      <img src="images/fileshare-cover.png" alt="File Sharing System project cover" onerror="this.onerror=null;this.src='images/fileshare-topology.png'">
+    </figure>
+
+    <!-- ===== Tabs ===== -->
+    <div class="pj-tabs" role="tablist" aria-label="Project sections">
+      <button class="pj-tab active" role="tab" id="t-overview" aria-selected="true" aria-controls="p-overview" type="button">Overview</button>
+      <button class="pj-tab" role="tab" id="t-arch" aria-selected="false" aria-controls="p-arch" tabindex="-1" type="button">Architecture</button>
+      <button class="pj-tab" role="tab" id="t-security" aria-selected="false" aria-controls="p-security" tabindex="-1" type="button">Security</button>
+      <button class="pj-tab" role="tab" id="t-code" aria-selected="false" aria-controls="p-code" tabindex="-1" type="button">Code</button>
+      <button class="pj-tab" role="tab" id="t-reflection" aria-selected="false" aria-controls="p-reflection" tabindex="-1" type="button">Results &amp; Reflection</button>
+    </div>
+
+    <!-- ================= OVERVIEW ================= -->
+    <section class="pj-panel" id="p-overview" role="tabpanel" aria-labelledby="t-overview">
+      <div class="pj-meta">
+        <div class="meta-item"><span>Course</span><strong>Distributed Systems</strong></div>
+        <div class="meta-item"><span>Campus</span><strong>Universitas Tarumanagara</strong></div>
+      </div>
+
+      <h2>What is this project?</h2>
+      <p>
+        This project simulates how files are shared inside a local network. Ubuntu Server acts as the file server,
+        and Puppy Linux machines act as clients that list, upload, and download files over TCP sockets.
+        The whole environment runs virtually, using GNS3 for the topology and VirtualBox for the machines.
+      </p>
+
+      <h2>My role</h2>
+      <p>
+        I was responsible for the network side of the project, from planning the IP scheme to making sure every
+        device could reach the server through a secured path.
+      </p>
+      <ul class="pj-list">
+        <li>Designed the IP addressing: one <code>/27</code> subnet per segment under <code>172.25.15.0</code></li>
+        <li>Configured the three Cisco routers (R1, R2, R3): interfaces, DNS, NAT, and static routes</li>
+        <li>Set up the Ubuntu router as gateway, NAT, firewall (UFW), and WireGuard VPN server</li>
+        <li>Configured the IP settings on both Puppy Linux clients</li>
+        <li>Ran connectivity tests (ping) from every router, the gateway, and both clients</li>
+      </ul>
+
+      <h2>Key features</h2>
+      <div class="pj-cards">
+        <div class="pj-card"><i class="fa-solid fa-network-wired"></i><h3>Segmented network</h3><p>Three routers and three switches split clients and server into separate subnets.</p></div>
+        <div class="pj-card"><i class="fa-solid fa-shield-halved"></i><h3>Central gateway</h3><p>All inter-subnet traffic passes through one Ubuntu machine that filters it.</p></div>
+        <div class="pj-card"><i class="fa-solid fa-file-arrow-up"></i><h3>File sharing</h3><p>List, upload, and download files through a custom TCP protocol in Python.</p></div>
+      </div>
+    </section>
+
+    <!-- ================= ARCHITECTURE ================= -->
+    <section class="pj-panel" id="p-arch" role="tabpanel" aria-labelledby="t-arch" hidden>
+      <h2>Network topology</h2>
+      <figure class="pj-figure">
+        <img src="images/fileshare-topology.png" alt="GNS3 topology with NAT1, routers R1, R2, R3, UbuntuRouter, three switches, two Puppy Linux clients, and the Ubuntu server" loading="lazy">
+        <figcaption>GNS3 topology: NAT1 → R1 → UbuntuRouter → R2 (server) and R3 (client 2).</figcaption>
+      </figure>
+      <p>
+        R1 connects to the internet through NAT1 and serves client 1 (Puppy-1). Every other segment is reached
+        through the Ubuntu router, which sits in the middle as a firewall and VPN gateway. The server lives
+        in its own segment behind R2.
+      </p>
+
+      <h2>IP addressing plan</h2>
+      <div class="table-wrap">
+        <table class="pj-table">
+          <thead><tr><th>Device</th><th>Interface</th><th>IP address</th><th>Connected to</th></tr></thead>
+          <tbody>
+            <tr><td>R1</td><td>f0/0</td><td>DHCP</td><td>NAT1 (internet)</td></tr>
+            <tr><td>R1</td><td>f0/1</td><td>172.25.15.33/27</td><td>Switch1 / Puppy-1</td></tr>
+            <tr><td>R1</td><td>f1/0</td><td>172.25.15.65/27</td><td>UbuntuRouter</td></tr>
+            <tr><td>UbuntuRouter</td><td>e1 / e0 / e2</td><td>.66 / .98 / .162</td><td>R1 / R2 / R3</td></tr>
+            <tr><td>R2</td><td>—</td><td>172.25.15.97 &amp; .129 /27</td><td>UbuntuRouter &amp; Switch2</td></tr>
+            <tr><td>R3</td><td>f0/0, f0/1</td><td>172.25.15.161 &amp; .193 /27</td><td>UbuntuRouter &amp; Switch3</td></tr>
+            <tr><td>Puppy-1 (client 1)</td><td>e0</td><td>172.25.15.34</td><td>gateway .33</td></tr>
+            <tr><td>UbuntuDisbud-1 (server)</td><td>e0</td><td>172.25.15.130</td><td>gateway .129</td></tr>
+            <tr><td>PuppyCloneClone-1 (client 2)</td><td>e0</td><td>172.25.15.194</td><td>gateway .193</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Routing and NAT</h2>
+      <ul class="pj-list">
+        <li><strong>Static routing</strong> on all routers. R1 sends the server and client-2 subnets to the Ubuntu router (<code>172.25.15.66</code>); R2 and R3 use it as their default route.</li>
+        <li><strong>NAT overload</strong> on R1 (f0/0 outside, f0/1 inside) so internal hosts can reach the internet.</li>
+        <li><strong>DNS</strong> set to <code>8.8.8.8</code> and <code>8.8.4.4</code> on routers and clients.</li>
+        <li>The Ubuntu router also does IP forwarding and <code>MASQUERADE</code> with iptables.</li>
+      </ul>
+
+      <h2>Router configuration results</h2>
+      <div class="pj-gallery">
+        <figure class="pj-figure">
+          <img src="images/fileshare/r1-routing.png" alt="Routing table on R1" loading="lazy">
+          <figcaption>Routing table on R1</figcaption>
+        </figure>
+        <figure class="pj-figure">
+          <img src="images/fileshare/r2-routing.png" alt="Routing table on R2" loading="lazy">
+          <figcaption>Routing table on R2</figcaption>
+        </figure>
+        <figure class="pj-figure">
+          <img src="images/fileshare/r3-routing.png" alt="Routing table on R3" loading="lazy">
+          <figcaption>Routing table on R3</figcaption>
+        </figure>
+      </div>
+
+      <h2>Application architecture</h2>
+      <p>
+        The app uses a classic client-server model over TCP. The server listens on <code>0.0.0.0:5000</code>,
+        handles one request at a time, and stores files in a <code>shared_files</code> folder.
+        Both clients reach it at <code>172.25.15.130</code>.
+      </p>
+    </section>
+
+    <!-- ================= SECURITY ================= -->
+    <section class="pj-panel" id="p-security" role="tabpanel" aria-labelledby="t-security" hidden>
+      <h2>Security layers</h2>
+      <div class="pj-cards">
+        <div class="pj-card"><i class="fa-solid fa-sitemap"></i><h3>Segmentation</h3><p>Clients and server sit in different subnets. Traffic between them is forced through the Ubuntu gateway.</p></div>
+        <div class="pj-card"><i class="fa-solid fa-fire"></i><h3>Firewall (UFW)</h3><p>Incoming traffic is denied by default. Only SSH (rate-limited), HTTPS, and the VPN port are allowed.</p></div>
+        <div class="pj-card"><i class="fa-solid fa-lock"></i><h3>WireGuard VPN</h3><p>A VPN server on the gateway with its own key pair, and a peer configured with the server's public key.</p></div>
+      </div>
+
+      <h2>How it was configured</h2>
+      <ol class="pj-steps">
+        <li><strong>Router and NAT.</strong> Enabled forwarding, cleared old iptables rules, then added a <code>MASQUERADE</code> rule and forward rules for the internal interfaces. Rules were saved to <code>/etc/iptables/rules.v4</code>.</li>
+        <li><strong>Firewall.</strong> Default deny incoming, allow outgoing, <code>ufw limit ssh</code> against brute-force attempts, and allow HTTPS.</li>
+        <li><strong>VPN.</strong> Installed WireGuard, generated a private/public key pair with restricted file permissions, opened <code>51820/udp</code>, and enabled <code>wg-quick@wg0</code> at boot.</li>
+        <li><strong>Peer.</strong> Generated keys on the peer and exchanged the server public key.</li>
+      </ol>
+
+      <h2>Configuration results</h2>
+      <div class="pj-gallery">
+        <figure class="pj-figure">
+          <img src="images/fileshare/ubuntu-nat.jpg" alt="Ubuntu router: NAT and forwarding" loading="lazy">
+          <figcaption>Ubuntu router: NAT and forwarding</figcaption>
+        </figure>
+        <figure class="pj-figure">
+          <img src="images/fileshare/ubuntu-ufw.jpg" alt="Ubuntu router: UFW firewall status" loading="lazy">
+          <figcaption>Ubuntu router: UFW firewall status</figcaption>
+        </figure>
+      </div>
+
+      <div class="pj-note">
+        <i class="fa-solid fa-circle-info"></i>
+        <p><strong>Scope note:</strong> the security work covers the network layer. The file transfer protocol itself has no user authentication or encryption yet; I listed both as next steps in the Reflection tab.</p>
+      </div>
+    </section>
+
+    <!-- ================= CODE ================= -->
+    <section class="pj-panel" id="p-code" role="tabpanel" aria-labelledby="t-code" hidden>
+      <h2>Application protocol</h2>
+      <p>The Python server and client talk through short text commands, then stream the file in 4096-byte chunks.</p>
+      <div class="table-wrap">
+        <table class="pj-table">
+          <thead><tr><th>Command</th><th>Server response</th><th>What happens</th></tr></thead>
+          <tbody>
+            <tr><td><code>LIST</code></td><td><code>FILES:a|b|c</code> or <code>NO_FILES</code></td><td>Returns the files in the shared folder</td></tr>
+            <tr><td><code>UPLOAD:name</code></td><td><code>READY</code> → <code>UPLOAD_SUCCESS</code></td><td>Client sends the size, then the bytes</td></tr>
+            <tr><td><code>DOWNLOAD:name</code></td><td><code>FILESIZE:n</code> or <code>FILE_NOT_FOUND</code></td><td>Client replies <code>READY</code>, server streams the file</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Server and client</h2>
+      <ul class="pj-list">
+        <li>Libraries: <code>socket</code>, <code>os</code>, <code>argparse</code></li>
+        <li>Server: TCP socket with <code>SO_REUSEADDR</code>, <code>listen(5)</code>, one handler per command, and <code>try/except/finally</code> so sockets always close</li>
+        <li>Client: interactive menu (list, upload, download, exit) or direct modes with <code>--mode</code> and <code>--file</code>, plus a live progress bar</li>
+      </ul>
+
+      <h2>Code screenshots</h2>
+      <div class="pj-gallery">
+        <figure class="pj-figure">
+          <img src="images/fileshare/code-server.png" alt="Server code" loading="lazy">
+          <figcaption>Server code</figcaption>
+        </figure>
+        <figure class="pj-figure">
+          <img src="images/fileshare/code-client.png" alt="Client code" loading="lazy">
+          <figcaption>Client code</figcaption>
+        </figure>
+      </div>
+
+      <h2>Run it</h2>
+      <pre class="code-block"><code># On Ubuntu server
+python3 FileShareServer.py --port=5000
+
+# On Puppy Linux client
+python3 FileShareClient.py --host=172.25.15.130 --port=5000</code></pre>
+
+      <h2>Network configuration samples</h2>
+      <p class="code-label">Cisco R1: NAT and static routes</p>
+      <pre class="code-block"><code>interface fa0/0
+ ip nat outside
+interface fa0/1
+ ip nat inside
+ip nat inside source list 1 interface fa0/0 overload
+
+ip route 172.25.15.96  255.255.255.224 172.25.15.66
+ip route 172.25.15.128 255.255.255.224 172.25.15.66
+ip route 172.25.15.192 255.255.255.224 172.25.15.66</code></pre>
+
+      <p class="code-label">Ubuntu router: NAT and firewall</p>
+      <pre class="code-block"><code>iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
+iptables -A FORWARD -i enp0s8 -j ACCEPT
+iptables -A FORWARD -i enp0s9 -j ACCEPT
+
+ufw default deny incoming
+ufw default allow outgoing
+ufw limit ssh
+ufw allow https
+ufw allow 51820/udp
+ufw enable</code></pre>
+
+      <p class="code-label">WireGuard key generation</p>
+      <pre class="code-block"><code>wg genkey | sudo tee /etc/wireguard/private.key
+sudo chmod go= /etc/wireguard/private.key
+sudo cat /etc/wireguard/private.key | wg pubkey | sudo tee /etc/wireguard/public.key
+sudo systemctl enable --now wg-quick@wg0.service</code></pre>
+    </section>
+
+    <!-- ================= RESULTS & REFLECTION ================= -->
+    <section class="pj-panel" id="p-reflection" role="tabpanel" aria-labelledby="t-reflection" hidden>
+      <h2>Results</h2>
+      <ul class="pj-list">
+        <li>Ping tests were run from R1, R2, R3, the Ubuntu router, and both clients toward the other nodes and the server.</li>
+        <li>Client 1 uploaded <code>test.txt</code> to the server and got <code>UPLOAD_SUCCESS</code>.</li>
+        <li>Client 2, in a different subnet, downloaded the same file successfully.</li>
+        <li>The server log recorded both the <code>UPLOAD</code> and <code>DOWNLOAD</code> operations.</li>
+      </ul>
+
+      <h2>Screenshots</h2>
+      <div class="pj-gallery">
+        <figure class="pj-figure">
+          <img src="images/fileshare/ping-tests.png" alt="Ping test across the network" loading="lazy">
+          <figcaption>Ping test across the network</figcaption>
+        </figure>
+        <figure class="pj-figure">
+          <img src="images/fileshare/terminals.jpg" alt="Server and client terminals" loading="lazy">
+          <figcaption>Server and client terminals</figcaption>
+        </figure>
+        <figure class="pj-figure">
+          <img src="images/fileshare/client1-upload.png" alt="Client 1 uploading test.txt" loading="lazy">
+          <figcaption>Client 1 uploading test.txt</figcaption>
+        </figure>
+        <figure class="pj-figure">
+          <img src="images/fileshare/client2-download.png" alt="Client 2 downloading test.txt" loading="lazy">
+          <figcaption>Client 2 downloading test.txt</figcaption>
+        </figure>
+        <figure class="pj-figure">
+          <img src="images/fileshare/server-log.png" alt="Server log of upload and download" loading="lazy">
+          <figcaption>Server log of upload and download</figcaption>
+        </figure>
+      </div>
+
+      <h2>Challenges</h2>
+      <div class="pj-cards two">
+        <div class="pj-card"><h3>GNS3 project would not open</h3><p>An error saying it could not connect to the GNS3 VM blocked access to the project. I restarted the VM, checked the host-VM network adapters, and made sure the ports were not blocked by a firewall.</p></div>
+        <div class="pj-card"><h3>Slow large transfers</h3><p>Running several VMs at once made big files slow, mostly because of virtual disk I/O.</p></div>
+      </div>
+
+      <h2>Design trade-off</h2>
+      <p>
+        The server is synchronous and single-threaded: it finishes one client before accepting the next.
+        That keeps transfers simple and avoids file race conditions, which suits a learning prototype.
+        The downside is that a second client has to wait during a long transfer.
+      </p>
+
+      <h2>What I learned</h2>
+      <ul class="pj-list">
+        <li>Planning subnets and routes carefully saves a lot of debugging time later</li>
+        <li>How NAT, static routing, and a central firewall work together in a segmented network</li>
+        <li>Testing layer by layer (ping first, then the application) makes problems easier to locate</li>
+      </ul>
+
+      <h2>Next steps</h2>
+      <ul class="pj-list">
+        <li>User authentication and encrypted transfers</li>
+        <li>Resume support for large files</li>
+        <li>Concurrent clients with threading or asynchronous I/O</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 Jesicca Anastasya. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
