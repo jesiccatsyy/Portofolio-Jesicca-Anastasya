@@ -195,9 +195,12 @@ i{color:var(--accent-strong);}
   .project-body .tag-row{justify-content:flex-start;}
   .info-cards{grid-template-columns:1fr;}
   .project-grid,.event-grid{grid-template-columns:1fr;}
-  .nav-links{position:fixed;top:64px;right:0;height:calc(100vh - 64px);width:72%;background:var(--surface);flex-direction:column;padding:40px 30px;gap:26px;transform:translateX(100%);transition:transform .3s ease;box-shadow:var(--shadow-hover);display:flex;}
-  .nav-links.open{transform:translateX(0);}
-  .burger{display:flex;}
+  /* backdrop-filter makes the navbar the containing block of position:fixed children,
+     which pushed the menu out of place on phones, so turn it off here */
+  .navbar{backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--warm-white);}
+  .nav-links{position:fixed;top:0;right:0;height:100vh;height:100dvh;width:72%;max-width:320px;background:var(--surface);flex-direction:column;padding:96px 30px 40px;gap:26px;transform:translateX(100%);visibility:hidden;transition:transform .3s ease,visibility .3s;box-shadow:var(--shadow-hover);display:flex;z-index:1;}
+  .nav-links.open{transform:translateX(0);visibility:visible;}
+  .burger{display:flex;position:relative;z-index:2;}
   .photo-frame{width:280px;aspect-ratio:1/1;}
 }
 @media (max-width:480px){
